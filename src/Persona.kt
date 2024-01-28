@@ -7,17 +7,13 @@
  * @property nombre Nombre de la persona.
  * @constructor Crea una instancia de la clase Persona con los atributos de peso y altura.
  */
-class Persona(peso: Double, altura: Double) {
+class Persona(val peso: Double, val altura: Double) {
 
     //GETTERS Y SETTERS - PROPIEDADES DE CLASE:
-    val peso: Double = peso
 
-    val altura: Double = altura
-
-    val imc = String.format("%.2f", peso / (altura * altura))
+    val imc = (String.format("%.2f", peso / (altura * altura))).toDouble()
 
     var nombre: String = ""
-        get() = field
         set(value) {
             require(value.isNotBlank()) { "Debes introducir un nombre válido." }
             field = value
@@ -36,6 +32,7 @@ class Persona(peso: Double, altura: Double) {
         this.nombre = nombre
     }
 //METODOS:
+
     /**
      * Método para calcular el Índice de Masa Corporal (IMC) de la persona.
      *
@@ -47,8 +44,9 @@ class Persona(peso: Double, altura: Double) {
         val imc = peso / (altura * altura)
         return imc
     }
-    fun obtenerImc(peso: Double, altura: Double): String {
-        val imcValor = imc(peso,altura)
+
+    private fun obtenerImc(peso: Double, altura: Double): String {
+        val imcValor = imc(peso, altura)
         return when {
             imcValor < 18.5 -> "Peso insuficiente."
             imcValor in 18.5..24.9 -> "Peso saludable."
@@ -72,6 +70,12 @@ class Persona(peso: Double, altura: Double) {
         return true
     }
 
+    override fun toString(): String {
+        return ("$nombre con altura ${altura}m (${alturaEncimaMedia(altura)}) " +
+                "tiene un peso de ${peso}kg (${pesoEncimaMedia(peso)})" +
+                "tiene un IMC de ${imc(peso, altura)} (${obtenerImc(peso, altura)})")
+    }
+
     override fun hashCode(): Int {
         var result = peso.hashCode()
         result = 31 * result + altura.hashCode()
@@ -80,10 +84,10 @@ class Persona(peso: Double, altura: Double) {
         return result
     }
 
+
     //COMPANION OBJECT
     /**
-     * saludar()
-     * Método de clase para saludar a una persona por su nombre.
+     * saludar() Método de clase para saludar a una persona por su nombre.
      *
      * @return Saludo.
      */
@@ -93,19 +97,18 @@ class Persona(peso: Double, altura: Double) {
         }
 
         /**
-         * alturaEncimaMedia()
-         * Método que indica si al altura de una Persona está o no por encima de la media
+         * alturaEncimaMedia() Método que indica si al altura de una Persona está o no por encima de la media
          * @return true si la altura está por encima de la media indicada, false si no está por encima de la media.
          */
         fun alturaEncimaMedia(altura: Double): Boolean {
             return altura >= 1.75
         }
+
         /**
-         * pesoEncimaMedia()
-         * Método que indica si el peso de una Persona está o no por encima de la media
+         * pesoEncimaMedia() Método que indica si el peso de una Persona está o no por encima de la media
          * @return true si el peso está por encima de la media indicada, false si no está por encima de la media.
          */
-        fun pesoEncimaMedia(peso: Double): Boolean{
+        fun pesoEncimaMedia(peso: Double): Boolean {
             return peso >= 70.0
         }
 
@@ -113,8 +116,8 @@ class Persona(peso: Double, altura: Double) {
          * obtenerDesc()
          * @return método que devuelve un texto con toda la información de cada objeto Persona.
          */
-        fun obtenerDesc(persona: Persona): String{
-             return ("${persona.nombre} con una altura de ${persona.altura}m (${alturaEncimaMedia(persona.altura)}) tiene un peso de ${persona.peso}kg (${pesoEncimaMedia(persona.peso)}) tiene un IMC de ${persona.imc(persona.peso,persona.altura)} (${persona.obtenerImc(persona.peso, persona.altura)})")
+        fun obtenerDesc(persona: Persona): String {
+            return persona.toString()
         }
 
     }
