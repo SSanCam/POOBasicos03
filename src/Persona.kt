@@ -75,7 +75,6 @@ class Persona(peso: Double, altura: Double) {
     /**
      * Método de clase para saludar a una persona por su nombre.
      *
-     * @param nombre Nombre de la persona a saludar.
      * @return Saludo.
      */
     companion object {
@@ -86,6 +85,12 @@ class Persona(peso: Double, altura: Double) {
         fun alturaEncimaMedia(altura: Double): Boolean {
             return altura >= 1.75
         }
+
+        fun pesoEncimaMedia(peso: Double): Boolean{
+            return peso >= 70.0
+        }
+
+
     }
 
 }

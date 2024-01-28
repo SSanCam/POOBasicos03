@@ -49,7 +49,7 @@ fun main() {
     println()
 
     val sonIguales = persona2 == persona3
-    if (sonIguales == false){
+    if (!sonIguales){
         println("Las personas 2 y 3 no son iguales.")
     }else{
         println("Las personas 2 y 3 son iguales.")
@@ -72,7 +72,17 @@ fun main() {
         if (Persona.alturaEncimaMedia(altura)){
             println("La altura: $altura, está por encima de la media.")
         }else{
-            println("La altura: $altura, no está dentro de la media.")
+            println("La altura: $altura, no está por encima de la media.")
+        }
+    }
+
+    //pesoEncimaMedia(): Boolean
+    val pesos = listOf(persona1.peso, persona2.peso, persona3.peso)
+    for (peso in pesos){
+        if (Persona.pesoEncimaMedia(peso)){
+            println("El peso: $peso, está por encima de la media.")
+        }else{
+            println("El peso: $peso, no está por encima de la media.")
         }
     }
 
