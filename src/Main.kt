@@ -86,5 +86,11 @@ fun main() {
         }
     }
 
+    /**
+     * obtenerDesc()
+     * Creamos una estructura de 5 personas más, a las que le vamos a implementar los nuevos métodos.
+     */
+
+
 
 }

@@ -47,6 +47,15 @@ class Persona(peso: Double, altura: Double) {
         val imc = peso / (altura * altura)
         return imc
     }
+    fun obtenerImc(peso: Double, altura: Double): String {
+        val imcValor = imc(peso,altura)
+        return when {
+            imcValor < 18.5 -> "Peso insuficiente."
+            imcValor in 18.5..24.9 -> "Peso saludable."
+            imcValor in 25.0..29.9 -> "Sobrepeso"
+            else -> "Obesidad"
+        }
+    }
 
     // MÉTODOS DE IGUALDAD Y HASHCODE QUE HEMOS GENERADO A PARTIR DEL CÓDIGO PREVIO
     override fun equals(other: Any?): Boolean {
@@ -73,6 +82,7 @@ class Persona(peso: Double, altura: Double) {
 
     //COMPANION OBJECT
     /**
+     * saludar()
      * Método de clase para saludar a una persona por su nombre.
      *
      * @return Saludo.
@@ -82,14 +92,30 @@ class Persona(peso: Double, altura: Double) {
             return ("Hola, $nombre")
         }
 
+        /**
+         * alturaEncimaMedia()
+         * Método que indica si al altura de una Persona está o no por encima de la media
+         * @return true si la altura está por encima de la media indicada, false si no está por encima de la media.
+         */
         fun alturaEncimaMedia(altura: Double): Boolean {
             return altura >= 1.75
         }
-
+        /**
+         * pesoEncimaMedia()
+         * Método que indica si el peso de una Persona está o no por encima de la media
+         * @return true si el peso está por encima de la media indicada, false si no está por encima de la media.
+         */
         fun pesoEncimaMedia(peso: Double): Boolean{
             return peso >= 70.0
         }
 
+        /**
+         * obtenerDesc()
+         * @return método que devuelve un texto con toda la información de cada objeto Persona.
+         */
+        fun obtenerDesc(persona: Persona): String{
+             return ("${persona.nombre} con una altura de ${persona.altura}m (${alturaEncimaMedia(persona.altura)}) tiene un peso de ${persona.peso}kg (${pesoEncimaMedia(persona.peso)}) tiene un IMC de ${persona.imc(persona.peso,persona.altura)} (${persona.obtenerImc(persona.peso, persona.altura)})")
+        }
 
     }
 
